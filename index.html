@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#142d27">
+    <meta name="description" content="Panel administrativo de inventario y ventas de NovaOffice S.A.S.">
+    <title>NovaOffice | Gestión empresarial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="NovaOffice, ir al inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M7 23V9h4l10 14V9h4v14h-4L11 9v14H7Z" fill="currentColor"/><circle cx="25" cy="7" r="3" fill="#42D392"/></svg>
+        </span>
+        <span class="brand-name">nova<span>office</span><small>GESTIÓN EMPRESARIAL</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <button class="nav-link is-active" type="button" data-view="inicio"><span>01</span>Inicio</button>
+        <button class="nav-link" type="button" data-view="productos"><span>02</span>Productos</button>
+        <button class="nav-link" type="button" data-view="venta"><span>03</span>Registrar venta</button>
+        <button class="nav-link" type="button" data-view="historial"><span>04</span>Historial</button>
+        <button class="nav-link" type="button" data-view="reportes"><span>05</span>Reportes</button>
+        <button class="nav-link" type="button" data-view="contacto"><span>06</span>Contacto</button>
+      </nav>
+      <div class="header-user" aria-label="Sesión de empleado">
+        <span class="user-avatar">N</span>
+        <span class="user-copy"><strong>NovaOffice</strong><small>Panel interno</small></span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="view is-visible" id="view-inicio" aria-labelledby="welcome-title">
+        <div class="welcome-banner">
+          <div class="welcome-copy">
+            <p class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> PANEL DE CONTROL</p>
+            <h1 id="welcome-title">Buenos días, equipo.</h1>
+            <p>Bienvenidos al centro de operaciones de NovaOffice. Aquí puedes gestionar el inventario y seguir el ritmo de las ventas.</p>
+            <button class="button button-lime" type="button" data-go="productos">Gestionar inventario <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="banner-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-card"><span class="art-card-kicker">HOY</span><span class="art-card-value" id="welcome-date">—</span><span class="art-card-line"></span><span class="art-card-caption">Todo en un solo lugar</span></div>
+            <span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div><p class="eyebrow">RESUMEN DE OPERACIÓN</p><h2>Tu negocio, de un vistazo</h2></div>
+          <span class="updated-label"><span class="status-dot"></span> Datos actualizados al momento</span>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-icon icon-green" aria-hidden="true">↗</span><span class="metric-period">ACUMULADO</span></div>
+            <p class="metric-label">Ingresos por ventas</p><p class="metric-value" id="home-revenue">$0</p><p class="metric-foot">Valor total de las transacciones</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-icon icon-lime" aria-hidden="true">▤</span><span class="metric-period">CATÁLOGO</span></div>
+            <p class="metric-label">Productos activos</p><p class="metric-value" id="home-products">0</p><p class="metric-foot">Referencias disponibles</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-icon icon-charcoal" aria-hidden="true">◷</span><span class="metric-period">ACUMULADO</span></div>
+            <p class="metric-label">Ventas registradas</p><p class="metric-value" id="home-sales">0</p><p class="metric-foot">Transacciones procesadas</p>
+          </article>
+        </div>
+        <div class="home-bottom-grid">
+          <article class="panel-card">
+            <div class="panel-heading"><div><p class="eyebrow">MOVIMIENTO RECIENTE</p><h3>Últimas ventas</h3></div><button class="text-button" type="button" data-go="historial">Ver historial <span aria-hidden="true">→</span></button></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>CLIENTE</th><th>PRODUCTO</th><th>FECHA</th><th class="align-right">VALOR</th></tr></thead>
+                <tbody id="home-recent-sales"></tbody>
+              </table>
+            </div>
+            <p class="empty-note hidden" id="home-empty-sales">Aún no hay ventas. Registra la primera para ver actividad aquí.</p>
+          </article>
+          <article class="panel-card quick-panel">
+            <p class="eyebrow">ACCESOS RÁPIDOS</p><h3>¿Qué necesitas hacer?</h3>
+            <button class="quick-link" type="button" data-go="venta"><span class="quick-icon">＋</span><span><strong>Registrar una venta</strong><small>Agrega una transacción al historial</small></span><span class="quick-arrow">→</span></button>
+            <button class="quick-link" type="button" data-go="productos"><span class="quick-icon quick-icon-soft">▦</span><span><strong>Administrar productos</strong><small>Actualiza precios y existencias</small></span><span class="quick-arrow">→</span></button>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-productos" aria-labelledby="products-title" hidden>
+        <div class="section-heading page-heading"><div><p class="eyebrow">INVENTARIO</p><h1 id="products-title">Productos</h1><p class="section-subtitle">Administra el catálogo, los precios y las existencias de tu negocio.</p></div><span class="count-pill"><span id="product-count">0</span> referencias</span></div>
+        <div class="content-grid products-layout">
+          <article class="panel-card form-panel">
+            <div class="panel-heading"><div><p class="eyebrow" id="product-form-eyebrow">NUEVA REFERENCIA</p><h2 id="product-form-title">Agregar producto</h2></div><span class="form-step">01</span></div>
+            <form id="product-form" novalidate>
+              <label for="product-name">Nombre del producto</label>
+              <input id="product-name" name="name" type="text" maxlength="80" placeholder="Ej. Cuaderno ejecutivo" required>
+              <label for="product-category">Categoría</label>
+              <select id="product-category" name="category" required>
+                <option value="">Selecciona una categoría</option><option>Papelería</option><option>Tecnología</option><option>Escritura</option><option>Organización</option><option>Accesorios</option><option>Otro</option>
+              </select>
+              <div class="form-row">
+                <div><label for="product-price">Precio unitario</label><div class="input-prefix"><span>$</span><input id="product-price" name="price" type="number" min="1" step="1" placeholder="0" required></div></div>
+                <div><label for="product-stock">Existencias</label><input id="product-stock" name="stock" type="number" min="0" step="1" placeholder="0" required></div>
+              </div>
+              <p class="field-hint">El precio debe ser mayor a $0 y las existencias no pueden ser negativas.</p>
+              <button class="button button-primary button-full" type="submit" id="save-product-button">Guardar producto <span aria-hidden="true">→</span></button>
+              <button class="text-button hidden" type="button" id="cancel-product-edit">Cancelar edición</button>
+            </form>
+          </article>
+          <article class="panel-card catalog-panel">
+            <div class="panel-heading catalog-heading"><div><p class="eyebrow">CATÁLOGO ACTUAL</p><h2>Inventario de productos</h2></div><label class="search-box" for="product-search"><span aria-hidden="true">⌕</span><input id="product-search" type="search" placeholder="Buscar producto..." aria-label="Buscar producto"></label></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>PRODUCTO</th><th>CATEGORÍA</th><th>PRECIO</th><th>EXISTENCIAS</th><th><span class="sr-only">Acciones</span></th></tr></thead>
+                <tbody id="products-table"></tbody>
+              </table>
+            </div>
+            <p class="empty-note hidden" id="products-empty">No hay productos que coincidan con tu búsqueda.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-venta" aria-labelledby="sale-title" hidden>
+        <div class="section-heading page-heading"><div><p class="eyebrow">PUNTO DE VENTA</p><h1 id="sale-title">Registrar venta</h1><p class="section-subtitle">Registra una transacción y actualiza las existencias en un solo paso.</p></div></div>
+        <div class="sale-layout">
+          <article class="panel-card form-panel sale-form-panel">
+            <div class="panel-heading"><div><p class="eyebrow">NUEVA TRANSACCIÓN</p><h2>Detalles de la venta</h2></div><span class="form-step">01</span></div>
+            <form id="sale-form" novalidate>
+              <label for="sale-client">Nombre del cliente</label><input id="sale-client" name="client" type="text" maxlength="80" placeholder="Ej. Empresa cliente S.A.S." required>
+              <label for="sale-product">Producto</label><select id="sale-product" name="productId" required><option value="">Selecciona un producto</option></select>
+              <div class="product-stock-note" id="sale-stock-note">Elige un producto para consultar existencias.</div>
+              <label for="sale-quantity">Cantidad</label><input id="sale-quantity" name="quantity" type="number" min="1" step="1" placeholder="1" required>
+              <div class="sale-total-box"><span>Total de la venta</span><strong id="sale-total">$0</strong><small id="sale-unit-price">Selecciona un producto y una cantidad</small></div>
+              <button class="button button-primary button-full" type="submit">Confirmar venta <span aria-hidden="true">→</span></button>
+            </form>
+          </article>
+          <aside class="sale-aside">
+            <div class="sale-note-card"><span class="note-icon">✓</span><p class="eyebrow eyebrow-light">PROCESO AUTOMÁTICO</p><h3>Una operación, siempre sincronizada.</h3><p>Al confirmar, la venta queda guardada en el historial y las existencias se descuentan automáticamente.</p></div>
+            <div class="panel-card mini-summary"><p class="eyebrow">DISPONIBILIDAD ACTUAL</p><div><span>Referencias en catálogo</span><strong id="sale-product-count">0</strong></div><div><span>Unidades disponibles</span><strong id="sale-units-count">0</strong></div><button class="text-button" type="button" data-go="productos">Revisar inventario <span aria-hidden="true">→</span></button></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-historial" aria-labelledby="history-title" hidden>
+        <div class="section-heading page-heading"><div><p class="eyebrow">REGISTRO COMERCIAL</p><h1 id="history-title">Historial de ventas</h1><p class="section-subtitle">Consulta las transacciones registradas en el sistema.</p></div><span class="count-pill"><span id="history-count">0</span> transacciones</span></div>
+        <article class="panel-card history-panel">
+          <div class="panel-heading catalog-heading"><div><p class="eyebrow">TODAS LAS TRANSACCIONES</p><h2>Actividad comercial</h2></div><label class="search-box" for="history-search"><span aria-hidden="true">⌕</span><input id="history-search" type="search" placeholder="Buscar cliente o producto..." aria-label="Buscar en el historial"></label></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>FECHA Y HORA</th><th>CLIENTE</th><th>PRODUCTO</th><th>CANTIDAD</th><th>PRECIO UNITARIO</th><th class="align-right">VALOR TOTAL</th></tr></thead>
+              <tbody id="history-table"></tbody>
+            </table>
+          </div>
+          <p class="empty-note hidden" id="history-empty">No hay transacciones que coincidan con tu búsqueda.</p>
+        </article>
+      </section>
+
+      <section class="view" id="view-reportes" aria-labelledby="reports-title" hidden>
+        <div class="section-heading page-heading"><div><p class="eyebrow">ANÁLISIS COMERCIAL</p><h1 id="reports-title">Reportes</h1><p class="section-subtitle">Indicadores para entender el movimiento de tu operación.</p></div></div>
+        <div class="metrics-grid report-metrics">
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon icon-green" aria-hidden="true">$</span><span class="metric-period">ACUMULADO</span></div><p class="metric-label">Ingresos totales</p><p class="metric-value" id="report-revenue">$0</p><p class="metric-foot">Suma de ventas registradas</p></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon icon-lime" aria-hidden="true">▤</span><span class="metric-period">ACUMULADO</span></div><p class="metric-label">Unidades vendidas</p><p class="metric-value" id="report-units">0</p><p class="metric-foot">Artículos despachados</p></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-icon icon-charcoal" aria-hidden="true">◷</span><span class="metric-period">PROMEDIO</span></div><p class="metric-label">Ticket promedio</p><p class="metric-value" id="report-ticket">$0</p><p class="metric-foot">Valor medio por transacción</p></article>
+        </div>
+        <div class="reports-grid">
+          <article class="panel-card chart-panel"><div class="panel-heading"><div><p class="eyebrow">TENDENCIA DE INGRESOS</p><h2>Últimos 7 días</h2></div><span class="chart-legend"><i></i> Ingresos</span></div><div class="chart" id="revenue-chart" role="img" aria-label="Gráfico de ingresos diarios de los últimos siete días"></div></article>
+          <article class="panel-card alerts-panel"><div class="panel-heading"><div><p class="eyebrow">ATENCIÓN</p><h2>Stock bajo</h2></div><span class="alert-count" id="low-stock-count">0</span></div><p class="alerts-intro">Productos con 5 unidades o menos disponibles.</p><div class="low-stock-list" id="low-stock-list"></div><p class="empty-note hidden" id="low-stock-empty">Todo en orden: no hay productos con stock bajo.</p><button class="text-button" type="button" data-go="productos">Ver inventario <span aria-hidden="true">→</span></button></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-contacto" aria-labelledby="contact-title" hidden>
+        <div class="section-heading page-heading"><div><p class="eyebrow">ESTAMOS PARA AYUDARTE</p><h1 id="contact-title">Contacto</h1><p class="section-subtitle">Comunícate con nuestro equipo o envíanos una solicitud.</p></div></div>
+        <div class="contact-layout">
+          <article class="contact-info-card"><p class="eyebrow eyebrow-light">NOVAOFFICE S.A.S.</p><h2>Hacemos más simple tu día de trabajo.</h2><p class="contact-lead">Nuestro equipo está listo para ayudarte con tus pedidos, productos o cualquier inquietud.</p><div class="contact-detail"><span>✉</span><div><small>ESCRÍBENOS</small><a href="mailto:contacto@novaoffice.com.co">contacto@novaoffice.com.co</a></div></div><div class="contact-detail"><span>⌖</span><div><small>VISÍTANOS</small><p>Bogotá, Colombia</p></div></div><div class="contact-detail"><span>◷</span><div><small>HORARIO DE ATENCIÓN</small><p>Lunes a viernes · 8:00 a. m. – 5:00 p. m.</p></div></div><div class="contact-decoration" aria-hidden="true">N.</div></article>
+          <article class="panel-card contact-form-panel"><div class="panel-heading"><div><p class="eyebrow">FORMULARIO DE CONTACTO</p><h2>Cuéntanos cómo podemos ayudarte</h2></div></div><form id="contact-form" novalidate><label for="contact-name">Nombre</label><input id="contact-name" name="name" type="text" maxlength="80" placeholder="Tu nombre" required><label for="contact-email">Correo electrónico</label><input id="contact-email" name="email" type="email" maxlength="120" placeholder="nombre@empresa.com" required><label for="contact-subject">Asunto</label><select id="contact-subject" name="subject" required><option value="">Selecciona un tema</option><option>Consulta sobre productos</option><option>Soporte del sistema</option><option>Solicitud comercial</option><option>Otro</option></select><label for="contact-message">Mensaje</label><textarea id="contact-message" name="message" rows="4" maxlength="600" placeholder="Escribe tu mensaje..." required></textarea><button class="button button-primary" type="submit">Enviar solicitud <span aria-hidden="true">→</span></button></form></article>
+        </div>
+      </section>
+      <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+    </main>
+    <footer class="site-footer"><span>© <span id="footer-year"></span> NovaOffice S.A.S.</span><span>Gestión clara. Negocios que avanzan.</span><span class="footer-status"><i></i> Sistema local activo</span></footer>
+  </body>
+</html>
